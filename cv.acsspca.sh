@@ -83,7 +83,7 @@ while true; do
 		filter=$2
 		shift 2
 		;;
-	--minmaxsep
+	--minmaxsep )
 		minmaxsep=$2
 		shift 2
 		;;
