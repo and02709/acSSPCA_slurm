@@ -11,8 +11,8 @@
 getopt -T &>/dev/null
 if [[ $? -ne 4 ]]; then echo "Getopt is too old!" >&2 ; exit 1 ; fi
 
-declare {setwd,index,npc,nfolds,ykernel,akernel,c1,maxiter,delta,filter,minmaxsep}
-OPTS=$(getopt -u -o '' -a --longoptions 'setwd:,index:,npc:,nfolds:,ykernel:,akernel:,c1:,maxiter:,delta:,filter:,minmaxsep:' -n "$0" -- "$@")
+declare {setwd,index,lambda,npc,nfolds,ykernel,akernel,c1,maxiter,delta,filter,minmaxsep}
+OPTS=$(getopt -u -o '' -a --longoptions 'setwd:,index:,lambda:,npc:,nfolds:,ykernel:,akernel:,c1:,maxiter:,delta:,filter:,minmaxsep:' -n "$0" -- "$@")
     # *** Added -o '' ; surrounted the longoptions by ''
 if [[ $? -ne 0 ]] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
     # *** This has to be right after the OPTS= assignment or $? will be overwritten
@@ -30,6 +30,10 @@ while true; do
 		  index=$2
 		  shift 2
 		  ;;
+    	--lambda )
+     		lambda=$2
+       		shift 2
+	 	;;
 	--npc )
       npc=$2
       shift 2
@@ -74,6 +78,6 @@ while true; do
   esac
 done
 module load R/4.3.0-openblas
-Rscript ${setwd}job_cv_acsspca.R $setwd $index $npc $nfolds $ykernel $akernel $c1 $maxiter $delta $filter $minmaxsep
+Rscript ${setwd}job_cv_acsspca.R $setwd $index $lambda $npc $nfolds $ykernel $akernel $c1 $maxiter $delta $filter $minmaxsep
 exit 0
 
