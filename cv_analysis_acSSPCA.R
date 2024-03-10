@@ -22,7 +22,7 @@ cv.mat <- cv.mat[,-1]
 metric.matrix <- acSPCA::mat.fill(param.grid=cv.mat,n.sp=n.sp,n.folds=n.folds)
 cv.metric <- apply(metric.matrix,1,mean)
 spath <- paste(setwd, "temp/sparg.txt",sep="")
-sp.arg <- read.table(spath, header=T)
+sp.arg <- read.table(spath, header=T) |> as.matrix() |> as.vector()
 cv.df <- data.frame(sparsity=sp.arg,cv.metric=cv.metric)
 colnames(cv.df) <- c("sparsity","cv.metric")
 best.metric <- min(cv.df$cv.metric)
