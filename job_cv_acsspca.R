@@ -37,9 +37,9 @@ fpath <- paste(setwd,"temp",sep="")
 xnpath <- paste(fpath,"/xnames.txt",sep="")
 ynpath <- paste(fpath,"/ynames.txt",sep="")
 anpath <- paste(fpath,"/anames.txt",sep="")
-xnames <- read.table(file=xnpath)
-ynames <- read.table(file=ynpath)
-anames <- read.table(file=anpath)
+xnames <- read.table(file=xnpath) |> as.matrix() |> as.vector()
+ynames <- read.table(file=ynpath) |> as.matrix() |> as.vector()
+anames <- read.table(file=anpath) |> as.matrix() |> as.vector()
 
 if(is.na(c1)) c1 <- NULL
 
