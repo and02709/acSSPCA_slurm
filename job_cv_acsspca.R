@@ -41,6 +41,7 @@ xnames <- read.table(file=xnpath)
 ynames <- read.table(file=ynpath)
 anames <- read.table(file=anpath)
 
+if(is.na(c1)) c1 <- NULL
 
 acsspca.obj <- cv.partition.acSSPCA(arg.sparse=paramgrid[index,],df.partition=df,npc=npc,n.folds=nfolds,resp.kernel=ykernel,conf.kernel=akernel,bandwidth=bandwidth,c1=c1,maxiter=maxter,delta=delta,filter=filter,minmaxsep=minmaxsep,x.names=xnames,y.names=ynames,a.names=anames)
 
