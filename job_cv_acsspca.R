@@ -45,7 +45,7 @@ anames <- read.table(file=anpath) |> as.matrix() |> as.vector()
 
 if(is.na(c1)) c1 <- NULL
 
-acsspca.obj <- cv.partition.acSSPCA(arg.sparse=paramgrid[index,],df.partition=df,lambda=lambda,npc=npc,n.folds=nfolds,resp.kernel=ykernel,conf.kernel=akernel,bandwidth=bandwidth,c1=c1,maxiter=maxter,delta=delta,filter=filter,minmaxsep=minmaxsep,x.names=xnames,y.names=ynames,a.names=anames)
+acsspca.obj <- cv.partition.acSSPCA(arg.sparse=paramgrid[index,],df.partition=df,lambda=lambda,npc=npc,n.folds=nfolds,resp.kernel=ykernel,conf.kernel=akernel,bandwidth=bandwidth,c1=c1,maxiter=maxiter,delta=delta,filter=filter,minmaxsep=minmaxsep,x.names=xnames,y.names=ynames,a.names=anames)
 
 fpath <- paste(setwd,"temp/cv_outputs/job_",index,".txt",sep="")
 data.obj <- data.frame(job=index,fold=paramgrid[index,1],sparse=paramgrid[index,2],cv.metric=acsspca.obj)
