@@ -2,18 +2,20 @@ args <- commandArgs()
 # define arguments
 setwd <- args[6]
 index <- as.numeric(args[7])
-npc <- as.numeric(args[8])
-nfolds <- as.numeric(args[9])
-ykernel <- args[10]
-akernel <- args[11]
-c1 <- as.numeric(args[12])
-maxiter <- as.numeric(args[13])
-delta <- as.numeric(args[14])
-filter <- as.numeric(args[15])
-minmaxsep <- as.numeric(args[16])
+lambda <- as.numeric(args[8])
+npc <- as.numeric(args[9])
+nfolds <- as.numeric(args[10])
+ykernel <- args[11]
+akernel <- args[12]
+c1 <- as.numeric(args[13])
+maxiter <- as.numeric(args[14])
+delta <- as.numeric(args[15])
+filter <- as.numeric(args[16])
+minmaxsep <- as.numeric(args[17])
 
 cat("setwd: ",setwd,"\n")
 cat("index: ", index,"\n")
+cat("lambda: ", lambda,"\n")
 cat("npc: ",npc,"\n")
 cat("nfolds: ",nfolds,"\n")
 cat("ykernel: ",ykernel,"\n")
@@ -43,7 +45,7 @@ anames <- read.table(file=anpath) |> as.matrix() |> as.vector()
 
 if(is.na(c1)) c1 <- NULL
 
-acsspca.obj <- cv.partition.acSSPCA(arg.sparse=paramgrid[index,],df.partition=df,npc=npc,n.folds=nfolds,resp.kernel=ykernel,conf.kernel=akernel,bandwidth=bandwidth,c1=c1,maxiter=maxter,delta=delta,filter=filter,minmaxsep=minmaxsep,x.names=xnames,y.names=ynames,a.names=anames)
+acsspca.obj <- cv.partition.acSSPCA(arg.sparse=paramgrid[index,],df.partition=df,lambda=lambda,npc=npc,n.folds=nfolds,resp.kernel=ykernel,conf.kernel=akernel,bandwidth=bandwidth,c1=c1,maxiter=maxter,delta=delta,filter=filter,minmaxsep=minmaxsep,x.names=xnames,y.names=ynames,a.names=anames)
 
 fpath <- paste(setwd,"temp/cv_outputs/job_",index,".txt",sep="")
 data.obj <- data.frame(job=index,fold=paramgrid[index,1],sparse=paramgrid[index,2],cv.metric=acsspca.obj)
